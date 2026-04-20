@@ -55,7 +55,7 @@ function olemisSubscribe(email) {
         olemisSubscribe(email).then(function(res) {
           if (res.ok || res.status === 202) {
             input.value = '';
-            btn.textContent = 'You\'re on the list ✓';
+            btn.textContent = 'You\'re on the list!';
             btn.style.background = '#2d6a4f';
           } else {
             btn.textContent = 'Try again';

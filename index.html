@@ -18,7 +18,7 @@
     </div>
   </noscript>
 <script>
-  function olemisSubscribe(email) {
+function olemisSubscribe(email) {
     return fetch('https://a.klaviyo.com/client/subscriptions/?company_id=XH57sJ', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'revision': '2023-12-15' },
@@ -26,8 +26,13 @@
         data: {
           type: 'subscription',
           attributes: {
-            list_id: 'Tg2wNM',
-            email_address: { address: email }
+            profile: {
+              data: {
+                type: 'profile',
+                attributes: { email: email }
+              }
+            },
+            list_id: 'Tg2wNM'
           }
         }
       })

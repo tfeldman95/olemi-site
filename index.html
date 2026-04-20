@@ -31,8 +31,10 @@ function klaviyoSubscribe(email) {
       data: {
         type: 'subscription',
         attributes: {
-          profile: { data: { type: 'profile', attributes: { email: email } } },
-          list_id: 'Tg2wNM'
+          profile: { data: { type: 'profile', attributes: { email: email } } }
+        },
+        relationships: {
+          list: { data: { type: 'list', id: 'Tg2wNM' } }
         }
       }
     })

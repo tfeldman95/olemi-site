@@ -17,6 +17,59 @@
       This page requires JavaScript to display.
     </div>
   </noscript>
+<script>
+  function olemisSubscribe(email) {
+    return fetch('https://a.klaviyo.com/client/subscriptions/?company_id=XH57sJ', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'revision': '2023-12-15' },
+      body: JSON.stringify({
+        data: {
+          type: 'subscription',
+          attributes: {
+            list_id: 'Tg2wNM',
+            email_address: { address: email }
+          }
+        }
+      })
+    });
+  }
+
+  function hookForms() {
+    document.querySelectorAll('input[type="email"]').forEach(function(input) {
+      if (input.dataset.klaviyoHooked) return;
+      input.dataset.klaviyoHooked = 'true';
+      var btn = input.closest('form')?.querySelector('button') ||
+                input.parentElement.querySelector('button') ||
+                input.nextElementSibling;
+      if (!btn) return;
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var email = input.value.trim();
+        if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
+        btn.textContent = 'Submitting...';
+        olemisSubscribe(email).then(function(res) {
+          if (res.ok || res.status === 202) {
+            input.value = '';
+            btn.textContent = 'You\'re on the list ✓';
+            btn.style.background = '#2d6a4f';
+          } else {
+            btn.textContent = 'Try again';
+            alert('Something went wrong. Please try again.');
+          }
+        }).catch(function() {
+          btn.textContent = 'Try again';
+          alert('Something went wrong. Please try again.');
+        });
+      });
+    });
+  }
+
+  var observer = new MutationObserver(hookForms);
+  document.addEventListener('DOMContentLoaded', function() {
+    observer.observe(document.body, { childList: true, subtree: true });
+    hookForms();
+  });
+</script>
 </head>
 <body>
   <div id="__bundler_thumbnail">

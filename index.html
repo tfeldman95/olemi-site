@@ -123,7 +123,111 @@
 </head>
 <body>
 <div id="root"></div>
-<script type="text/babel" src="src/product.jsx"></script>
+<script type="text/babel">
+// ── Inlined product.jsx ──────────────────────────────────
+
+const LozengeDisc = ({ size = 220, label = "OLEMI", color = "var(--paper)", ink = "var(--ink)", emboss = true }) => {
+  const s = size;
+  return (
+    <svg viewBox="0 0 220 220" width={s} height={s} style={{ display: "block" }}>
+      <defs>
+        <radialGradient id="lozShade" cx="38%" cy="32%" r="70%">
+          <stop offset="0%" stopColor="rgba(255,255,255,0.95)" />
+          <stop offset="60%" stopColor="rgba(255,255,255,0.2)" />
+          <stop offset="100%" stopColor="rgba(0,0,0,0.15)" />
+        </radialGradient>
+      </defs>
+      <circle cx="110" cy="110" r="102" fill={color} />
+      {emboss && <circle cx="110" cy="110" r="102" fill="url(#lozShade)" />}
+      <circle cx="110" cy="110" r="86" fill="none" stroke={ink} strokeOpacity="0.18" strokeWidth="1" />
+      <text x="110" y="118" textAnchor="middle" fontFamily="Instrument Serif, serif" fontSize="42" fill={ink} letterSpacing="2">{label}</text>
+      <text x="110" y="140" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="8" fill={ink} fillOpacity="0.55" letterSpacing="3">ORAL · PROBIOTIC · 01</text>
+    </svg>
+  );
+};
+
+const ProductSachet = ({ brand = "OLEMI" }) => {
+  const W = 400, H = 420, br = 32, border = 36;
+  return (
+    <div style={{ position: "relative", width: "100%", aspectRatio: `${W} / ${H}` }}>
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" height="100%" style={{ display: "block", overflow: "visible" }}>
+        <defs>
+          <filter id="sachetDrop" x="-20%" y="-20%" width="140%" height="150%">
+            <feDropShadow dx="0" dy="18" stdDeviation="22" floodColor="rgba(0,0,0,0.45)" />
+            <feDropShadow dx="0" dy="4" stdDeviation="6" floodColor="rgba(0,0,0,0.25)" />
+          </filter>
+          <pattern id="xhatch" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="6" x2="6" y2="0" stroke="rgba(255,255,255,0.18)" strokeWidth="0.8"/>
+            <line x1="-1" y1="1" x2="1" y2="-1" stroke="rgba(255,255,255,0.18)" strokeWidth="0.8"/>
+            <line x1="5" y1="7" x2="7" y2="5" stroke="rgba(255,255,255,0.18)" strokeWidth="0.8"/>
+          </pattern>
+          <linearGradient id="mainGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#2A6636"/><stop offset="40%" stopColor="#1A4D22"/><stop offset="100%" stopColor="#0F2E14"/>
+          </linearGradient>
+          <linearGradient id="centerGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#2D6E3A"/><stop offset="50%" stopColor="#1A4D22"/><stop offset="100%" stopColor="#122E17"/>
+          </linearGradient>
+          <linearGradient id="sheenGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.22)"/><stop offset="100%" stopColor="rgba(255,255,255,0)"/>
+          </linearGradient>
+          <linearGradient id="leftEdge" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.35)"/><stop offset="100%" stopColor="rgba(255,255,255,0)"/>
+          </linearGradient>
+          <radialGradient id="puffGrad" cx="42%" cy="38%" r="55%">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.14)"/><stop offset="100%" stopColor="rgba(0,0,0,0)"/>
+          </radialGradient>
+          <radialGradient id="cornerVig" cx="50%" cy="50%" r="70%">
+            <stop offset="60%" stopColor="rgba(0,0,0,0)"/><stop offset="100%" stopColor="rgba(0,0,0,0.28)"/>
+          </radialGradient>
+        </defs>
+        <g filter="url(#sachetDrop)">
+          <rect x="2" y="2" width={W-4} height={H-4} rx={br} ry={br} fill="url(#mainGrad)"/>
+          <rect x="2" y="2" width={W-4} height={H-4} rx={br} ry={br} fill="url(#xhatch)"/>
+          <rect x="2" y="2" width={W-4} height={H-4} rx={br} ry={br} fill="url(#puffGrad)"/>
+          <rect x="2" y="2" width={W-4} height={H/2} rx={br} ry={br} fill="url(#sheenGrad)" opacity="0.7"/>
+          <rect x="2" y="2" width={W-4} height={H-4} rx={br} ry={br} fill="url(#cornerVig)"/>
+          <rect x="2" y="2" width={W-4} height={H-4} rx={br} ry={br} fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5"/>
+          <rect x={border-2} y={border-2} width={W-border*2+4} height={H-border*2+4} rx={br/2+2} ry={br/2+2} fill="none" stroke="rgba(0,0,0,0.3)" strokeWidth="4"/>
+          <rect x={border} y={border} width={W-border*2} height={H-border*2} rx={br/2} ry={br/2} fill="url(#centerGrad)"/>
+          <rect x={border} y={border} width={W-border*2} height={(H-border*2)*0.45} rx={br/2} ry={br/2} fill="url(#sheenGrad)" opacity="0.8"/>
+          <rect x={border} y={border} width={18} height={H-border*2} rx={br/2} ry={br/2} fill="url(#leftEdge)"/>
+          <rect x={border} y={border} width={W-border*2} height={H-border*2} rx={br/2} ry={br/2} fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="1"/>
+        </g>
+        <line x1={br+4} y1={border+14} x2={W-br-4} y2={border+14} stroke="rgba(255,255,255,0.55)" strokeWidth="1.2" strokeDasharray="4 3"/>
+        <polygon points={"2," + (border+5) + " 18," + (border+14) + " 2," + (border+23)} fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" strokeWidth="0.8"/>
+        <polygon points={(W-2) + "," + (border+5) + " " + (W-18) + "," + (border+14) + " " + (W-2) + "," + (border+23)} fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" strokeWidth="0.8"/>
+        <text x={border+20} y={border+28} fontFamily="JetBrains Mono, monospace" fontSize="11" fill="rgba(255,255,255,0.6)" letterSpacing="2.5" textAnchor="start">DAILY ORAL PROBIOTIC</text>
+        <text x={border+16} y={border+100} fontFamily="Instrument Serif, serif" fontSize="72" fill="rgba(255,255,255,0.95)" letterSpacing="-1.5" textAnchor="start">OLEMI</text>
+        <text x={border+20} y={border+124} fontFamily="Instrument Serif, serif" fontSize="16" fontStyle="italic" fill="rgba(255,255,255,0.72)" letterSpacing="0" textAnchor="start">1 chewable lozenge daily.</text>
+        <text x={border+20} y={border+140} fontFamily="JetBrains Mono, monospace" fontSize="9" fill="rgba(255,255,255,0.52)" letterSpacing="3" textAnchor="start">CLEAN MINT</text>
+        <line x1={border+20} y1={border+150} x2={W-border-20} y2={border+150} stroke="rgba(255,255,255,0.22)" strokeWidth="0.8"/>
+        <text x={border+20} y={border+172} fontFamily="JetBrains Mono, monospace" fontSize="9" fill="rgba(255,255,255,0.65)" letterSpacing="2.5" textAnchor="start"><tspan>SUPPORTS</tspan><tspan letterSpacing="0">:</tspan></text>
+        {["Fresh breath", "Healthy gums & teeth", "Sinus + throat health", "Balanced oral microbiome"].map((b, i) => (
+          <g key={i}>
+            <circle cx={border+26} cy={border+194+i*22} r={3} fill="rgba(255,255,255,0.6)"/>
+            <text x={border+38} y={border+198+i*22} fontFamily="Inter Tight, system-ui, sans-serif" fontSize="13" fill="rgba(255,255,255,0.88)" letterSpacing="0.3" textAnchor="start">{b}</text>
+          </g>
+        ))}
+        <text x={border+20} y={H-border-20} fontFamily="Inter Tight, system-ui, sans-serif" fontSize="13" fill="rgba(255,255,255,0.88)" letterSpacing="0.3" textAnchor="start">Powered by BLIS K12™ + M18™</text>
+        <text x={border+20} y={H-border-4} fontFamily="Inter Tight, system-ui, sans-serif" fontSize="13" fill="rgba(255,255,255,0.88)" letterSpacing="0.3" textAnchor="start">Clinically studied strains · 2 billion CFU</text>
+      </svg>
+    </div>
+  );
+};
+
+const ProductHero = ({ brand = "OLEMI" }) => {
+  return (
+    <div style={{ position: "relative", width: "100%", aspectRatio: "1 / 1", maxWidth: 560, display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ position: "absolute", bottom: "2%", left: "14%", right: "14%", height: "6%", background: "rgba(13,51,17,0.62)", borderRadius: "50%", filter: "blur(12px)", transform: "scaleY(0.3) translateY(70%)", pointerEvents: "none" }} />
+      <div style={{ position: "absolute", bottom: "3%", left: "8%", right: "8%", height: "8%", background: "rgba(13,51,17,0.28)", borderRadius: "50%", filter: "blur(22px)", transform: "scaleY(0.35) translateY(50%)", pointerEvents: "none" }} />
+      <div style={{ width: "82%", aspectRatio: "400 / 420", position: "relative", zIndex: 1 }}>
+        <ProductSachet brand={brand} />
+      </div>
+    </div>
+  );
+};
+window.ProductHero = ProductHero;
+</script>
 <script type="text/babel">
 window.__BRAND_NAME__ = "OLEMI";
 window.TWEAKS = { brandName: "OLEMI", palette: "forestGreen" };

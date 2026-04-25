@@ -47,13 +47,13 @@
     .mobile-hero {
       display: flex !important;
       flex-direction: column;
-      height: 100dvh;
-      max-height: 100dvh;
-      overflow: hidden;
-      padding: 20px 24px 28px 24px;
+      min-height: 100dvh;
+      overflow-y: auto;
+      padding: 20px 24px 32px 24px;
       background: var(--bg);
       color: var(--ink);
       justify-content: space-between;
+      gap: 24px;
     }
     /* Swap section order on mobile: product (3) before bacteria (2) */
     #root > div {
@@ -352,27 +352,17 @@ function MobileHero() {
           color: "var(--ink)", marginBottom: 10,
         }}>A daily oral care probiotic lozenge.</p>
 
-        {/* BLIS trust signal — credential badge treatment */}
-        <div style={{
-          display: "inline-flex", alignItems: "center", gap: 8,
-          border: "1px solid var(--ink)", padding: "7px 12px",
-          marginBottom: 10,
-        }}>
-          <span style={{
-            width: 6, height: 6, borderRadius: "50%",
-            background: "var(--ink)", flexShrink: 0,
-          }} />
-          <p style={{
-            fontFamily: "var(--mono)", fontSize: "clamp(9px, 2.6vw, 11px)",
-            letterSpacing: "0.06em", lineHeight: 1.4,
-            color: "var(--ink)", textTransform: "uppercase",
-          }}>Powered by BLIS K12™ + M18™ — the most clinically studied oral probiotic strains available.</p>
-        </div>
+        <p style={{
+          fontFamily: "var(--mono)", fontSize: "clamp(9px, 2.5vw, 10.5px)",
+          letterSpacing: "0.06em", lineHeight: 1.55,
+          color: "var(--ink)", textTransform: "uppercase",
+          marginBottom: 10, maxWidth: "32ch",
+        }}>Powered by BLIS K12™ + M18™ — the most clinically studied oral probiotic strains available.</p>
 
         <p style={{
           fontFamily: "var(--display)", fontStyle: "normal",
-          fontSize: "clamp(15px, 4vw, 19px)", lineHeight: 1.4,
-          color: "var(--ink)", marginBottom: 16,
+          fontSize: "clamp(13px, 3.5vw, 16px)", lineHeight: 1.4,
+          color: "var(--ink)", marginBottom: 16, whiteSpace: "nowrap",
         }}>Fresher breath · Healthier gums & teeth · Balanced oral microbiome</p>
       </div>
 
